@@ -24,7 +24,11 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "hasky": "^3.0.2",
-    "lint-staged": "^11.2.6"
+    "lint-staged": "^11.2.6",
+    "@types/cors": "^2.8.12",
+    "@types/email-templates": "^8.0.4",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/nodemailer": "^6.4.4"
   },
   "husky": {
     "hooks": {
