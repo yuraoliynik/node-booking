@@ -8,13 +8,11 @@ const {
 const orderSchema = new Schema({
     start_date: {
         type: Date,
-        required: true,
-        default: undefined
+        required: true
     },
     end_date: {
         type: Date,
-        required: true,
-        default: undefined
+        required: true
     },
     place: {
         type: Schema.Types.ObjectId,

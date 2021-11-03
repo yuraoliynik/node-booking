@@ -6,47 +6,69 @@ const {
     userStatuses
 } = require('../constants');
 
-const userValidator = Joi.object({
-    name: Joi.string()
-        .required()
-        .min(2)
-        .max(15)
-        .trim(),
+const name = Joi.string()
+    .min(2)
+    .max(15)
+    .trim();
 
-    last_name: Joi.string()
-        .required()
-        .min(2)
-        .max(15)
-        .trim(),
+const last_name = Joi.string()
+    .min(2)
+    .max(15)
+    .trim();
 
-    phone_number: Joi.string()
-        .required()
-        .trim()
-        .regex(regexp.PHONE_NUMBER),
+const phone_number = Joi.string()
+    .trim()
+    .regex(regexp.PHONE_NUMBER);
 
-    email: Joi.string()
-        .required()
-        .trim()
-        .lowercase()
-        .regex(regexp.EMAIL),
+const email = Joi.string()
+    .trim()
+    .lowercase()
+    .regex(regexp.EMAIL);
 
-    password: Joi.string()
-        .required()
-        .min(6)
-        .trim()
-        .regex(regexp.PASSWORD),
+const password = Joi.string()
+    .min(6)
+    .trim()
+    .regex(regexp.PASSWORD);
 
-    avatar: Joi.string(),
+const avatar = Joi.string();
 
-    rating: Joi.number(),
+const rating = Joi.number()
+    .min(0)
+    .max(5);
 
-    status: Joi.string()
-        .allow(...Object.values(userStatuses))
-        .default(userStatuses.NOT_ACTIVE),
+const status = Joi.string()
+    .valid(...Object.values(userStatuses));
 
-    role: Joi.string()
-        .allow(...Object.values(userRoles))
-        .default(userRoles.GUEST)
-});
+const role = Joi.string();
 
-module.exports = userValidator;
+module.exports = {
+    create: Joi.object({
+        name: name.required(),
+        last_name: last_name.required(),
+        phone_number: phone_number.required(),
+        email: email.required(),
+        password: password.required(),
+        role: role.required().valid(userRoles.GUEST, userRoles.OWNER)
+    }),
+
+    createManager: Joi.object({
+        name: name.required(),
+        last_name: last_name.required(),
+        phone_number: phone_number.required(),
+        email: email.required(),
+        password: password.required(),
+        status: status.default(userStatuses.ACTIVE),
+        role: role.required().valid(userRoles.MANAGER)
+    }),
+
+    updateAvatar: Joi.object({
+        avatar: avatar.required()
+    }),
+
+    updateData: Joi.object({
+        name,
+        last_name,
+        rating,
+        status
+    })
+};

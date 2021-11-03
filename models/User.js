@@ -42,13 +42,14 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        required: true,
-        default: undefined
+        default: ''
     },
     rating: {
         type: Number,
         required: true,
-        default: undefined
+        min: 0,
+        max: 5,
+        default: 0
     },
     status: {
         type: String,

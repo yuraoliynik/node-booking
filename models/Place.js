@@ -9,57 +9,51 @@ const placeSchema = new Schema({
     title: {
         type: String,
         required: true,
-        maxlength: 50,
-        default: undefined
+        maxlength: 50
     },
     description: {
         type: String,
         required: true,
-        maxlength: 300,
-        default: undefined
+        maxlength: 300
     },
     country: {
         type: String,
-        required: true,
-        default: undefined
+        required: true
     },
     city: {
         type: String,
-        required: true,
-        default: undefined
+        required: true
     },
     region: {
         type: String,
-        default: undefined
+        default: ''
     },
     district: {
         type: String,
-        default: undefined
+        default: ''
     },
     street: {
         type: String,
-        required: true,
-        default: undefined
+        required: true
     },
     house: {
         type: Number,
-        required: true,
-        default: undefined
+        required: true
     },
     apartment: {
         type: Number,
         required: true,
-        default: undefined
+        default: -1
     },
     price: {
         type: Number,
         required: true,
-        default: undefined
+        default: 0
     },
     square: {
         type: Number,
         required: true,
-        default: undefined
+        default: 0
     },
     guests: {
         type: Number,
@@ -82,14 +76,15 @@ const placeSchema = new Schema({
         default: 1
     },
     photo: {
-        type: Array[String],
-        required: true,
-        default: undefined
+        type: [String],
+        default: ''
     },
     rating: {
         type: Number,
         required: true,
-        default: undefined
+        min: 0,
+        max: 5,
+        default: 0
     },
     status: {
         type: String,

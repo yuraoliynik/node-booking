@@ -21,7 +21,7 @@ const orderValidator = Joi.object({
         .required(),
 
     status: Joi.string()
-        .allow(...Object.values(orderStatuses))
+        .valid(...Object.values(orderStatuses))
         .default(orderStatuses.CHECKING)
 });
 

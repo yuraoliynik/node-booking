@@ -3,6 +3,8 @@ module.exports = {
     // countries: require('./country.enum'),
 
     actionTokenTypes: require('./action-token-type.enum'),
+    errorMessages: require('./error-message.enum'),
+    errorStatuses: require('./error-status.enum'),
     modelNames: require('./model-name.enum'),
     orderStatuses: require('./order-status.enum'),
     placeStatuses: require('./place-status.enum'),

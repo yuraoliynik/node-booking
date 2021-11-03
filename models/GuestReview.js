@@ -7,14 +7,12 @@ const {
 const guestReviewSchema = new Schema({
     comment: {
         type: String,
-        required: true,
         length: 300,
-        default: undefined
+        default: ''
     },
     photo: {
-        type: Array[String],
-        required: true,
-        default: undefined
+        type: [String],
+        default: ''
     },
     rating: {
         type: Number,

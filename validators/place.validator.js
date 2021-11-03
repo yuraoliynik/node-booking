@@ -4,59 +4,88 @@ const {
     placeStatuses
 } = require('../constants');
 
-const placeValidator = Joi.object({
-    title: Joi.string()
-        .required()
-        .max(50),
+const title = Joi.string()
+    .max(50);
 
-    description: Joi.string()
-        .max(300),
+const description = Joi.string()
+    .max(300);
 
-    country: Joi.string()
-        .required(),
+const country = Joi.string();
 
-    city: Joi.string()
-        .required(),
+const city = Joi.string();
 
-    region: Joi.string(),
+const region = Joi.string();
 
-    district: Joi.string(),
+const district = Joi.string();
 
-    street: Joi.string()
-        .required(),
+const street = Joi.string();
 
-    house: Joi.number()
-        .required(),
+const house = Joi.number();
 
-    apartment: Joi.number(),
+const apartment = Joi.number();
 
-    price: Joi.number(),
+const price = Joi.number();
 
-    square: Joi.number(),
+const square = Joi.number();
 
-    guests: Joi.number(),
+const guests = Joi.number();
 
-    bedrooms: Joi.number(),
+const bedrooms = Joi.number();
 
-    bathrooms: Joi.number(),
+const bathrooms = Joi.number();
 
-    beds: Joi.number(),
+const beds = Joi.number();
 
-    photo: Joi.array()
-        .items(Joi.string()),
+const photo = Joi.array()
+    .items(Joi.string());
 
-    rating: Joi.number(),
+const rating = Joi.number();
 
-    status: Joi.string()
-        .allow(...Object.values(placeStatuses))
-        .default(placeStatuses.CHECKING),
+const status = Joi.string()
+    .valid(...Object.values(placeStatuses));
 
-    owner: Joi.string()
-        .required(),
+const owner = Joi.string();
 
-    owner_confirmation: Joi.boolean()
-        .required()
-        .default(false)
-});
+const owner_confirmation = Joi.boolean();
 
-module.exports = placeValidator;
+module.exports = {
+    create: Joi.object({
+        title: title.required(),
+        description: description.required(),
+        country: country.required(),
+        city: city.required(),
+        region,
+        district,
+        street: street.required(),
+        house: house.required(),
+        apartment,
+        price,
+        square,
+        guests,
+        bedrooms,
+        bathrooms,
+        beds,
+        owner: owner.required(),
+        owner_confirmation,
+    }),
+
+    updatePhoto: Joi.object({
+        photo: photo.required()
+    }),
+
+    updateData: Joi.object({
+        title,
+        description,
+        region,
+        district,
+        price,
+        square,
+        guests,
+        bedrooms,
+        bathrooms,
+        beds,
+        rating,
+        status,
+        owner_confirmation
+    }),
+};

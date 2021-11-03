@@ -7,14 +7,12 @@ const {
 const ownerReviewSchema = new Schema({
     comment: {
         type: String,
-        required: true,
         length: 300,
-        default: undefined
+        default: ''
     },
     photo: {
-        type: Array[String],
-        required: true,
-        default: undefined
+        type: [String],
+        default: ''
     },
     rating: {
         type: Number,
@@ -31,7 +29,7 @@ const ownerReviewSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: modelNames.User
+        ref: modelNames.USER
     },
 }, {
     id: false,
