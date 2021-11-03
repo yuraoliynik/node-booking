@@ -22,27 +22,28 @@ const userSchema = new Schema({
         trim: true
     },
     phone_number: {
-        type: Number,
-        minlength: 12,
-        maxlength: 12,
-        default: 0
+        type: String,
+        required: true,
+        unique: true
     },
     email: {
         type: String,
         required: true,
         unique: true,
         trim: true,
-        lowercase: true,
+        lowercase: true
     },
     password: {
         type: String,
         required: true,
         trim: true,
-        lowercase: true,
+        minlength: 6,
+        select: false
     },
     avatar: {
         type: String,
-        default: ''
+        required: true,
+        default: undefined
     },
     rating: {
         type: Number,

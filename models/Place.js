@@ -6,40 +6,40 @@ const {
 } = require('../constants');
 
 const placeSchema = new Schema({
-    title:  {
+    title: {
         type: String,
         required: true,
         maxlength: 50,
-        default: ''
+        default: undefined
     },
-    description:  {
+    description: {
         type: String,
         required: true,
-        maxlength: 200,
-        default: ''
+        maxlength: 300,
+        default: undefined
     },
     country: {
         type: String,
         required: true,
-        default: ''
+        default: undefined
     },
     city: {
         type: String,
         required: true,
-        default: ''
+        default: undefined
     },
     region: {
         type: String,
-        default: ''
+        default: undefined
     },
     district: {
         type: String,
-        default: ''
+        default: undefined
     },
     street: {
         type: String,
         required: true,
-        default: ''
+        default: undefined
     },
     house: {
         type: Number,
@@ -79,27 +79,7 @@ const placeSchema = new Schema({
     beds: {
         type: Number,
         required: true,
-        default: 0
-    },
-    wi_fi: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    tv: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    microwave: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    parking: {
-        type: Boolean,
-        required: true,
-        default: false
+        default: 1
     },
     photo: {
         type: Array[String],
@@ -122,7 +102,7 @@ const placeSchema = new Schema({
         required: true,
         ref: modelNames.USER
     },
-    confirmation: {
+    owner_confirmation: {
         type: Boolean,
         required: true,
         default: false

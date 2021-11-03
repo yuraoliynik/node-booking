@@ -6,13 +6,15 @@ const {
 } = require('../constants');
 
 const orderSchema = new Schema({
-    start_date:  {
+    start_date: {
         type: Date,
-        required: true
+        required: true,
+        default: undefined
     },
-    end_date:  {
+    end_date: {
         type: Date,
-        required: true
+        required: true,
+        default: undefined
     },
     place: {
         type: Schema.Types.ObjectId,

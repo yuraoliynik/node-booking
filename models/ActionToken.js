@@ -10,13 +10,11 @@ const actionTokenSchema = new Schema({
         type: String,
         required: true
     },
-
     type: {
         type: String,
         required: true,
         enum: Object.values(actionTokenTypes)
     },
-
     user: {
         type: Schema.Types.ObjectId,
         required: true,

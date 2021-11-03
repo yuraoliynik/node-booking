@@ -5,11 +5,13 @@ const {
 } = require('../constants');
 
 const guestReviewSchema = new Schema({
-    comment:  {
-        type: Date,
-        required: true
+    comment: {
+        type: String,
+        required: true,
+        length: 300,
+        default: undefined
     },
-    photo:  {
+    photo: {
         type: Array[String],
         required: true,
         default: undefined
@@ -17,6 +19,7 @@ const guestReviewSchema = new Schema({
     rating: {
         type: Number,
         required: true,
+        min: 0,
         max: 5,
         default: 0
     },
