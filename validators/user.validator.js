@@ -6,50 +6,70 @@ const {
     userStatuses
 } = require('../constants');
 
-const name = Joi.string()
-    .min(2)
-    .max(15)
-    .trim();
+const userJoiProp = {
+    name:
+        Joi.string()
+            .min(2)
+            .max(15)
+            .trim(),
+    last_name:
+        Joi.string()
+            .min(2)
+            .max(15)
+            .trim(),
+    phone_number:
+        Joi.string()
+            .trim()
+            .regex(regexp.PHONE_NUMBER),
+    email:
+        Joi.string()
+            .trim()
+            .lowercase()
+            .regex(regexp.EMAIL),
+    password:
+        Joi.string()
+            .min(6)
+            .trim()
+            .regex(regexp.PASSWORD),
+    avatar:
+        Joi.string(),
+    rating:
+        Joi.number()
+            .min(0)
+            .max(5),
+    status:
+        Joi.string()
+            .valid(...Object.values(userStatuses)),
+    role:
+        Joi.string()
+};
 
-const last_name = Joi.string()
-    .min(2)
-    .max(15)
-    .trim();
-
-const phone_number = Joi.string()
-    .trim()
-    .regex(regexp.PHONE_NUMBER);
-
-const email = Joi.string()
-    .trim()
-    .lowercase()
-    .regex(regexp.EMAIL);
-
-const password = Joi.string()
-    .min(6)
-    .trim()
-    .regex(regexp.PASSWORD);
-
-const avatar = Joi.string();
-
-const rating = Joi.number()
-    .min(0)
-    .max(5);
-
-const status = Joi.string()
-    .valid(...Object.values(userStatuses));
-
-const role = Joi.string();
+const {
+    name,
+    last_name,
+    phone_number,
+    email,
+    password,
+    avatar,
+    rating,
+    status,
+    role
+} = userJoiProp;
 
 module.exports = {
-    create: Joi.object({
+    addPhoneOrEmail: Joi.object({
+        phone_number,
+        email
+    }).xor('phone_number', 'email'),
+
+    createUser: Joi.object({
         name: name.required(),
         last_name: last_name.required(),
-        phone_number: phone_number.required(),
-        email: email.required(),
+        phone_number,
+        email,
         password: password.required(),
         role: role.required().valid(userRoles.GUEST, userRoles.OWNER)
-    }),
+    }).xor('phone_number', 'email'),
 
     createManager: Joi.object({
         name: name.required(),
@@ -67,8 +87,8 @@ module.exports = {
 
     updateData: Joi.object({
         name,
-        last_name,
-        rating,
-        status
-    })
+        last_name
+    }),
+
+    userJoiProp
 };

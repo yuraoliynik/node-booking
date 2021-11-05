@@ -4,52 +4,78 @@ const {
     placeStatuses
 } = require('../constants');
 
-const title = Joi.string()
-    .max(50);
+const placeJoiProp = {
+    title:
+        Joi.string()
+            .max(50),
+    description:
+        Joi.string()
+            .max(300),
+    country:
+        Joi.string(),
+    city:
+        Joi.string(),
+    region:
+        Joi.string(),
+    district:
+        Joi.string(),
+    street:
+        Joi.string(),
+    house:
+        Joi.number(),
+    apartment:
+        Joi.number(),
+    price:
+        Joi.number(),
+    square:
+        Joi.number(),
+    guests:
+        Joi.number(),
+    bedrooms:
+        Joi.number(),
+    bathrooms:
+        Joi.number(),
+    beds:
+        Joi.number(),
+    photo:
+        Joi.array()
+            .items(Joi.string()),
+    rating:
+        Joi.number(),
+    status:
+        Joi.string()
+            .valid(...Object.values(placeStatuses)),
+    owner:
+        Joi.string(),
+    owner_confirmation:
+        Joi.boolean()
+};
 
-const description = Joi.string()
-    .max(300);
-
-const country = Joi.string();
-
-const city = Joi.string();
-
-const region = Joi.string();
-
-const district = Joi.string();
-
-const street = Joi.string();
-
-const house = Joi.number();
-
-const apartment = Joi.number();
-
-const price = Joi.number();
-
-const square = Joi.number();
-
-const guests = Joi.number();
-
-const bedrooms = Joi.number();
-
-const bathrooms = Joi.number();
-
-const beds = Joi.number();
-
-const photo = Joi.array()
-    .items(Joi.string());
-
-const rating = Joi.number();
-
-const status = Joi.string()
-    .valid(...Object.values(placeStatuses));
-
-const owner = Joi.string();
-
-const owner_confirmation = Joi.boolean();
+const {
+    title,
+    description,
+    country,
+    city,
+    region,
+    district,
+    street,
+    house,
+    apartment,
+    price,
+    square,
+    guests,
+    bedrooms,
+    bathrooms,
+    beds,
+    photo,
+    rating,
+    status,
+    owner,
+    owner_confirmation,
+} = placeJoiProp;
 
 module.exports = {
-    create: Joi.object({
+    createPlace: Joi.object({
         title: title.required(),
         description: description.required(),
         country: country.required(),
@@ -87,5 +113,5 @@ module.exports = {
         rating,
         status,
         owner_confirmation
-    }),
+    })
 };

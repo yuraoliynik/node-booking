@@ -23,15 +23,14 @@ const userSchema = new Schema({
     },
     phone_number: {
         type: String,
-        required: true,
-        unique: true
+        trim: true,
+        default: ''
     },
     email: {
         type: String,
-        required: true,
-        unique: true,
         trim: true,
-        lowercase: true
+        lowercase: true,
+        default: ''
     },
     password: {
         type: String,
@@ -69,6 +68,9 @@ const userSchema = new Schema({
     versionKey: false,
     toObject: {virtuals: true},
     toJSON: {virtuals: true}
-});
+}).index(
+    {phone_number: 1, email: 1},
+    {unique: true}
+);
 
 module.exports = model(modelNames.USER, userSchema);
