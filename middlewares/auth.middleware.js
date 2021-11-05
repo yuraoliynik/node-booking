@@ -52,7 +52,7 @@ module.exports = {
                 });
             }
 
-            jwtService.validate(token, tokenTypes.ACCESS);
+            jwtService.verifyToken(token, tokenTypes.ACCESS);
 
             const foundOAuth = await OAuth
                 .findOne({access_token: token})
@@ -85,7 +85,7 @@ module.exports = {
                 });
             }
 
-            jwtService.validate(token, tokenTypes.REFRESH);
+            jwtService.verifyToken(token, tokenTypes.REFRESH);
 
             const foundOAuth = await OAuth
                 .findOne({refresh_token: token})

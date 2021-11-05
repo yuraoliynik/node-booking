@@ -34,7 +34,14 @@ module.exports = {
 
     isUserIdExist: async (req, res, next) => {
         try {
-            const {params: {userId}} = req;
+            const {
+                params: {userId},
+                checkedOwner
+            } = req;
+
+            if (checkedOwner) {
+                return next();
+            }
 
             const foundUser = await User
                 .findById(userId)

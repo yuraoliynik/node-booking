@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -8,9 +9,7 @@ const {
     MONGO_CONNECT_URL
 } = require('./configs/config');
 
-const {
-    errorStatuses
-} = require('./constants');
+const {errorStatuses} = require('./constants');
 
 const {
     authRouter,
@@ -24,6 +23,7 @@ mongoose.connect(MONGO_CONNECT_URL).then(() => {
     console.log('Mongo connected successfully');
 });
 
+app.use(fileUpload({}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 

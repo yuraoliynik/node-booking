@@ -1,12 +1,7 @@
 const userRouter = require('express').Router();
 
-const {
-    userRoles
-} = require('../constants');
-
-const {
-    userController
-} = require('../controllers');
+const {userRoles} = require('../constants');
+const {userController} = require('../controllers');
 
 const {
     authMiddleware,
@@ -15,14 +10,12 @@ const {
     validatorMiddleware
 } = require('../middlewares');
 
-const {
-    userValidator
-} = require('../validators');
+const {userValidator} = require('../validators');
 
 userRouter.get(
     '/',
     authMiddleware.checkAccessToken,
-    rightMiddleware.ifUserRole([
+    rightMiddleware.checkUserRole([
         userRoles.ADMIN,
         userRoles.MANAGER
     ]),
@@ -37,6 +30,7 @@ userRouter.post(
 
 userRouter.get(
     '/:userId',
+    authMiddleware.checkAccessToken,
     userMiddleware.isUserIdExist,
     userController.getUserById
 );
@@ -44,18 +38,18 @@ userRouter.put(
     '/:userId',
     validatorMiddleware.isBodyValidate(userValidator.updateData),
     authMiddleware.checkAccessToken,
-    rightMiddleware.ifUserRole([
+    rightMiddleware.checkUserRole([
         userRoles.ADMIN,
         userRoles.MANAGER
     ]),
-    rightMiddleware.ifOwnUserId,
+    rightMiddleware.checkOwner,
     userMiddleware.isUserIdExist,
     userController.updateUser
 );
 userRouter.delete(
     '/:userId',
     authMiddleware.checkAccessToken,
-    rightMiddleware.ifUserRole([
+    rightMiddleware.checkUserRole([
         userRoles.ADMIN,
         userRoles.MANAGER
     ]),
@@ -67,7 +61,7 @@ userRouter.post(
     '/:userId/phone-or-email',
     validatorMiddleware.isBodyValidate(userValidator.addPhoneOrEmail),
     authMiddleware.checkAccessToken,
-    rightMiddleware.ifOwnUserId,
+    rightMiddleware.checkOwner,
     userMiddleware.addPhoneOrEmail,
     userMiddleware.isPhoneOrEmailExist,
     userController.updateUser

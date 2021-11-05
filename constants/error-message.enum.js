@@ -13,6 +13,5 @@ module.exports = {
     WRONG_DATA_FOR_LOGIN: 'Wrong data for login',
     WRONG_EMAIL_OR_PASSWORD: 'Wrong email or password',
     WRONG_TEMPLATE_NAME: 'Wrong template name',
-    WRONG_TOKEN_TYPE: 'Wrong token type',
-    WRONG_USER_ID: 'Wrong user id'
+    WRONG_TOKEN_TYPE: 'Wrong token type'
 };

@@ -1,9 +1,12 @@
 module.exports = {
     actionTokenTypes: require('./action-token-type.enum'),
+    fileMaxSizes: require('./file-max-size.enum'),
+    fileMimeTypes: require('./file-mime-type.enum'),
     emailActions: require('./email-action.enum'),
     errorMessages: require('./error-message.enum'),
     errorStatuses: require('./error-status.enum'),
     headerNames: require('./header-name.enum'),
+    itemTypes: require('./item-type.enum'),
     modelNames: require('./model-name.enum'),
     orderStatuses: require('./order-status.enum'),
     placeStatuses: require('./place-status.enum'),
