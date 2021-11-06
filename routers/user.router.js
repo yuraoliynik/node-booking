@@ -1,11 +1,14 @@
 const userRouter = require('express').Router();
 
-const {userRoles} = require('../constants');
+const {
+    endPoints
+} = require('../constants');
 const {userController} = require('../controllers');
 
 const {
+    accessMiddleware,
     authMiddleware,
-    rightMiddleware,
+    fileMiddleware,
     userMiddleware,
     validatorMiddleware
 } = require('../middlewares');
@@ -15,15 +18,13 @@ const {userValidator} = require('../validators');
 userRouter.get(
     '/',
     authMiddleware.checkAccessToken,
-    rightMiddleware.checkUserRole([
-        userRoles.ADMIN,
-        userRoles.MANAGER
-    ]),
+    accessMiddleware.checkEndpointPermissions(endPoints.GET_USERS),
     userController.getUsers
 );
 userRouter.post(
     '/',
     validatorMiddleware.isBodyValidate(userValidator.createUser),
+    accessMiddleware.checkEndpointPermissions(endPoints.CREATE_USER),
     userMiddleware.isPhoneOrEmailExist,
     userController.createUser
 );
@@ -31,37 +32,66 @@ userRouter.post(
 userRouter.get(
     '/:userId',
     authMiddleware.checkAccessToken,
-    userMiddleware.isUserIdExist,
+    accessMiddleware.checkEndpointPermissions(endPoints.GET_USER_BY_ID),
+    userMiddleware.checkUserIdAndFoundUser,
     userController.getUserById
 );
 userRouter.put(
     '/:userId',
     validatorMiddleware.isBodyValidate(userValidator.updateData),
     authMiddleware.checkAccessToken,
-    rightMiddleware.checkUserRole([
-        userRoles.ADMIN,
-        userRoles.MANAGER
-    ]),
-    rightMiddleware.checkOwner,
-    userMiddleware.isUserIdExist,
+    accessMiddleware.checkEndpointPermissions(endPoints.UPDATE_USER),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
     userController.updateUser
 );
 userRouter.delete(
     '/:userId',
     authMiddleware.checkAccessToken,
-    rightMiddleware.checkUserRole([
-        userRoles.ADMIN,
-        userRoles.MANAGER
-    ]),
-    userMiddleware.isUserIdExist,
+    accessMiddleware.checkEndpointPermissions(endPoints.DELETE_USER),
+    userMiddleware.checkUserIdAndFoundUser,
     userController.deleteUser
+);
+
+userRouter.post(
+    '/:userId/avatar',
+    fileMiddleware.checkUserAvatar,
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.ADD_AVATAR),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
+    userMiddleware.uploadUserAvatar,
+    userController.updateUser
+);
+
+userRouter.post(
+    '/:userId/avatar',
+    fileMiddleware.checkUserAvatar,
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.UPDATE_AVATAR),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
+    userMiddleware.uploadUserAvatar,
+    userController.updateUser
+);
+
+userRouter.delete(
+    '/:userId/avatar',
+    validatorMiddleware.isBodyValidate(userValidator.updateAvatar),
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.DELETE_AVATAR),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
+    userController.updateUser
 );
 
 userRouter.post(
     '/:userId/phone-or-email',
     validatorMiddleware.isBodyValidate(userValidator.addPhoneOrEmail),
     authMiddleware.checkAccessToken,
-    rightMiddleware.checkOwner,
+    accessMiddleware.checkEndpointPermissions(endPoints.ADD_PHONE_OR_EMAIL),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
     userMiddleware.addPhoneOrEmail,
     userMiddleware.isPhoneOrEmailExist,
     userController.updateUser

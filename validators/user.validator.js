@@ -71,23 +71,16 @@ module.exports = {
         role: role.required().valid(userRoles.GUEST, userRoles.OWNER)
     }).xor('phone_number', 'email'),
 
-    createManager: Joi.object({
-        name: name.required(),
-        last_name: last_name.required(),
-        phone_number: phone_number.required(),
-        email: email.required(),
-        password: password.required(),
-        status: status.default(userStatuses.ACTIVE),
-        role: role.required().valid(userRoles.MANAGER)
-    }),
-
     updateAvatar: Joi.object({
         avatar: avatar.required()
     }),
 
     updateData: Joi.object({
         name,
-        last_name
+        last_name,
+        rating,
+        status,
+        role
     }),
 
     userJoiProp

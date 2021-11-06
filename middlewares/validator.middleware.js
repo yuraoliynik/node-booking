@@ -4,13 +4,13 @@ const {
 } = require('../constants');
 
 module.exports = {
-    isBodyValidate: (validator, authKey = 0) => (req, res, next) => {
+    isBodyValidate: (validator, loginErrorKey = 0) => (req, res, next) => {
         try {
             const {body} = req;
 
             const {error} = validator.validate(body);
 
-            if (error && authKey) {
+            if (error && loginErrorKey) {
                 return next({
                     message: errorMessages.WRONG_DATA_FOR_LOGIN,
                     status: errorStatuses.code_400

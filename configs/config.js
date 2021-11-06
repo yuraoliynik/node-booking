@@ -4,6 +4,11 @@ module.exports = {
     APP_PORT: process.env.APP_PORT || 5000,
     ALLOWED_ORIGIN: process.env.ALLOWED_ORIGIN,
 
+    AWS_S3_NAME: process.env.AWS_S3_NAME,
+    AWS_S3_REGION: process.env.AWS_S3_REGION,
+    AWS_S3_ACCESS_KEY_ID: process.env.AWS_S3_ACCESS_KEY_ID,
+    AWS_S3_SECRET_ACCESS_KEY: process.env.AWS_S3_SECRET_ACCESS_KEY,
+
     HOST_URL: process.env.HOST_URL || 'http://localhost:5000',
 
     MONGO_CONNECT_URL: process.env.MONGO_CONNECT_URL || 'mongodb://localhost:27017/booking',

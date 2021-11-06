@@ -1,9 +1,11 @@
 const {
     errorMessages,
-    errorStatuses
+    errorStatuses,
+    itemTypes
 } = require('../constants');
-const {User} = require('../models');
 
+const {User} = require('../models');
+const {s3Service} = require('../services');
 module.exports = {
     addPhoneOrEmail: (req, res, next) => {
         try {
@@ -32,7 +34,7 @@ module.exports = {
         }
     },
 
-    isUserIdExist: async (req, res, next) => {
+    checkUserIdAndFoundUser: async (req, res, next) => {
         try {
             const {
                 params: {userId},
@@ -90,6 +92,27 @@ module.exports = {
             next();
         } catch (e) {
             next(e);
+        }
+    },
+
+    uploadUserAvatar: async (req, res, next) => {
+        try {
+            const {
+                files: {avatar},
+                foundUser: {_id}
+            } = req;
+
+            const uploadInfo = await s3Service.uploadImage(
+                avatar,
+                itemTypes.USERS,
+                _id.toString()
+            );
+
+            req.body = {avatar: uploadInfo.Location};
+
+            next();
+        } catch (err) {
+            next(err);
         }
     }
 };

@@ -25,7 +25,7 @@ module.exports = {
 
     refresh: async (req, res, next) => {
         try {
-            const {foundUser, foundUser: {_id}} = req;
+            const {authorizedUser, authorizedUser: {_id}} = req;
 
             const oAuthTokens = jwtService.generateOAuthTokens();
 
@@ -37,7 +37,7 @@ module.exports = {
             res
                 .status(errorStatuses.code_201)
                 .json({
-                    user: foundUser,
+                    user: authorizedUser,
                     ...oAuthTokens
                 });
         } catch (e) {

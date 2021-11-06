@@ -66,7 +66,7 @@ module.exports = {
                 });
             }
 
-            req.foundUser = foundOAuth.user;
+            req.authorizedUser = foundOAuth.user;
 
             next();
         } catch (e) {
@@ -103,7 +103,7 @@ module.exports = {
                 refresh_token: token
             });
 
-            req.foundUser = foundOAuth.user;
+            req.authorizedUser = foundOAuth.user;
 
             next();
         } catch (e) {

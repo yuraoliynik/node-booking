@@ -14,7 +14,7 @@ module.exports = {
 
         if (!isPasswordMatched) {
             throw new ErrorHandler(
-                errorMessages.WRONG_EMAIL_OR_PASSWORD,
+                errorMessages.WRONG_DATA_FOR_LOGIN,
                 errorStatuses.code_400
             );
         }

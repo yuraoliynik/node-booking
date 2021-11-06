@@ -3,6 +3,7 @@ module.exports = {
     fileMaxSizes: require('./file-max-size.enum'),
     fileMimeTypes: require('./file-mime-type.enum'),
     emailActions: require('./email-action.enum'),
+    endPoints: require('./end-poin.enum'),
     errorMessages: require('./error-message.enum'),
     errorStatuses: require('./error-status.enum'),
     headerNames: require('./header-name.enum'),

@@ -12,6 +12,7 @@ module.exports = {
     USER_IS_NOT_ACTIVATED: 'User is not activated',
     WRONG_DATA_FOR_LOGIN: 'Wrong data for login',
     WRONG_EMAIL_OR_PASSWORD: 'Wrong email or password',
+    WRONG_ENDPOINT_NAME: 'Wrong endpoint name',
     WRONG_TEMPLATE_NAME: 'Wrong template name',
     WRONG_TOKEN_TYPE: 'Wrong token type'
 };
