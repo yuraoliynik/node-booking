@@ -14,8 +14,7 @@ module.exports = {
         try {
             const {
                 params: {userId},
-                authorizedUser,
-                authorizedUser: {_id, role}
+                authorizedUser
             } = req;
 
             if (!endPointName) {
@@ -30,6 +29,8 @@ module.exports = {
             if (endpointPermission.includes(userRoles.ALL)) {
                 return next();
             }
+
+            const {_id, role} = authorizedUser;
 
             const isThisOwner = endpointPermission.includes(userRoles.OWNER) && userId === _id.toString();
 

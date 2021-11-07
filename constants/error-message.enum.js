@@ -3,6 +3,7 @@ module.exports = {
     CAN_NOT_CHANGE_PHONE_OR_EMAIL: 'Can not change phone or email',
     CORS_IS_NOT_ALLOWED: 'CORS is not allowed',
     FILE_IS_TOO_BIG: 'File is too big',
+    INVALID_MESSAGE_TOKEN: 'Invalid message token',
     INVALID_TOKEN: 'Invalid token',
     NO_AVATAR: 'No avatar',
     NOT_SUPPORTED_FORMAT: 'Not supported format',

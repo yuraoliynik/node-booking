@@ -1,9 +1,26 @@
-const {errorStatuses} = require('../constants');
+const {HOST_URL} = require('../configs/config');
+
 const {
+    actionTokenTypes,
+    emailActions,
+    errorStatuses,
+    messageTokenTypes
+} = require('../constants');
+
+const {
+    ActionToken,
+    MessageToken,
     OAuth,
     User
 } = require('../models');
-const {passwordService} = require('../services');
+
+const {
+    emailService,
+    jwtService,
+    messageService,
+    messageTokenService,
+    passwordService
+} = require('../services');
 
 module.exports = {
     getUsers: async (req, res, next) => {
@@ -30,7 +47,10 @@ module.exports = {
 
     createUser: async (req, res, next) => {
         try {
-            const {body, body: {password}} = req;
+            const {
+                body,
+                body: {password}
+            } = req;
 
             const hashPassword = await passwordService.hash(password);
 
@@ -38,6 +58,45 @@ module.exports = {
                 ...body,
                 password: hashPassword
             });
+
+            const {_id, phone_number, email} = createdUser;
+
+            if (!!phone_number) {
+                const messageToken = messageTokenService.generateMessageToken(
+                    messageTokenTypes.PHONE_NUMBER_VERIFY
+                );
+
+                await MessageToken.create({
+                    ...messageToken,
+                    user: _id
+                });
+
+                const messageText = `${messageToken} is your verification code.`;
+
+                await messageService.sendMessage(
+                    phone_number,
+                    messageText
+                );
+            }
+
+            if (!!email) {
+                const actionToken = jwtService.generateActionToken(actionTokenTypes.ACTIVATE_ACCOUNT);
+
+                await ActionToken.create({
+                    ...actionToken,
+                    user: _id
+                });
+
+                const linkActivateAccount = `${HOST_URL}/auth/activate-account/${actionToken.token}`;
+                await emailService.sendMail(
+                    email,
+                    emailActions.USER_REGISTRATION,
+                    {
+                        userName: name,
+                        link: linkActivateAccount
+                    }
+                );
+            }
 
             res
                 .status(errorStatuses.code_201)

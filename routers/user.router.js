@@ -1,8 +1,6 @@
 const userRouter = require('express').Router();
 
-const {
-    endPoints
-} = require('../constants');
+const {endPoints} = require('../constants');
 const {userController} = require('../controllers');
 
 const {
@@ -87,7 +85,7 @@ userRouter.delete(
 
 userRouter.post(
     '/:userId/phone-or-email',
-    validatorMiddleware.isBodyValidate(userValidator.addPhoneOrEmail),
+    validatorMiddleware.isBodyValidate(userValidator.updatePhoneOrEmail),
     authMiddleware.checkAccessToken,
     accessMiddleware.checkEndpointPermissions(endPoints.ADD_PHONE_OR_EMAIL),
     userMiddleware.checkUserIdAndFoundUser,

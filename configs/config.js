@@ -13,6 +13,8 @@ module.exports = {
 
     MONGO_CONNECT_URL: process.env.MONGO_CONNECT_URL || 'mongodb://localhost:27017/booking',
 
+    MESSAGE_BIRD_ACCESS_KEY: process.env.MESSAGE_BIRD_ACCESS_KEY,
+
     NO_REPLAY_EMAIL: process.env.NO_REPLAY_EMAIL,
     NO_REPLAY_EMAIL_PASS: process.env.NO_REPLAY_EMAIL_PASS,
 

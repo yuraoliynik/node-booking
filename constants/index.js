@@ -8,6 +8,7 @@ module.exports = {
     errorStatuses: require('./error-status.enum'),
     headerNames: require('./header-name.enum'),
     itemTypes: require('./item-type.enum'),
+    messageTokenTypes: require('./message-token-type.enum'),
     modelNames: require('./model-name.enum'),
     orderStatuses: require('./order-status.enum'),
     placeStatuses: require('./place-status.enum'),

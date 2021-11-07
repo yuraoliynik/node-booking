@@ -57,7 +57,7 @@ const {
 } = userJoiProp;
 
 module.exports = {
-    addPhoneOrEmail: Joi.object({
+    updatePhoneOrEmail: Joi.object({
         phone_number,
         email
     }).xor('phone_number', 'email'),
