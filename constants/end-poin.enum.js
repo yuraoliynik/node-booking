@@ -12,4 +12,5 @@ module.exports = {
 
     ADD_PHONE_OR_EMAIL: 'add-phone-or-email',
 
+    CHANGE_USER_DATA: 'change-user-data'
 };

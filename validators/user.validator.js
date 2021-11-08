@@ -63,21 +63,39 @@ module.exports = {
     }).xor('phone_number', 'email'),
 
     createUser: Joi.object({
-        name: name.required(),
-        last_name: last_name.required(),
+        name: name
+            .required(),
+        last_name: last_name
+            .required(),
         phone_number,
         email,
-        password: password.required(),
-        role: role.required().valid(userRoles.GUEST, userRoles.OWNER)
+        password: password
+            .required(),
+        role: role
+            .required()
+            .valid(
+                userRoles.GUEST,
+                userRoles.HOLDER
+            )
     }).xor('phone_number', 'email'),
 
     updateAvatar: Joi.object({
-        avatar: avatar.required()
+        avatar: avatar
+            .required()
     }),
 
     updateData: Joi.object({
         name,
+        last_name
+    }),
+
+    changeUserDataForManager: Joi.object({
+        name,
         last_name,
+        phone_number,
+        email,
+        password,
+        avatar,
         rating,
         status,
         role

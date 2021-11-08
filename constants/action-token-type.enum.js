@@ -1,4 +1,4 @@
 module.exports = {
-    ACTIVATE_ACCOUNT: 'activate_account',
+    ACTIVATE_USER: 'activate_user',
     FORGOT_PASSWORD: 'forgot_password'
 };

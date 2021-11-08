@@ -61,7 +61,6 @@ userRouter.post(
     userMiddleware.uploadUserAvatar,
     userController.updateUser
 );
-
 userRouter.post(
     '/:userId/avatar',
     fileMiddleware.checkUserAvatar,
@@ -72,7 +71,6 @@ userRouter.post(
     userMiddleware.uploadUserAvatar,
     userController.updateUser
 );
-
 userRouter.delete(
     '/:userId/avatar',
     validatorMiddleware.isBodyValidate(userValidator.updateAvatar),
@@ -82,7 +80,6 @@ userRouter.delete(
     accessMiddleware.checkRoleRights,
     userController.updateUser
 );
-
 userRouter.post(
     '/:userId/phone-or-email',
     validatorMiddleware.isBodyValidate(userValidator.updatePhoneOrEmail),
@@ -92,6 +89,15 @@ userRouter.post(
     accessMiddleware.checkRoleRights,
     userMiddleware.addPhoneOrEmail,
     userMiddleware.isPhoneOrEmailExist,
+    userController.updateUser
+);
+userRouter.delete(
+    '/:userId/data',
+    validatorMiddleware.isBodyValidate(userValidator.changeUserDataForManager),
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.CHANGE_USER_DATA),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
     userController.updateUser
 );
 

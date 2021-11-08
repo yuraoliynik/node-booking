@@ -2,15 +2,20 @@ const {
     errorMessages,
     errorStatuses,
     headerNames,
+    messageTokenTypes,
     tokenTypes
 } = require('../constants');
 
 const {
+    ActionToken,
     OAuth,
     User
 } = require('../models');
 
-const {jwtService} = require('../services');
+const {
+    jwtService,
+    messageTokenService
+} = require('../services');
 
 module.exports = {
     checkPhoneOrEmail: async (req, res, next) => {
@@ -108,6 +113,62 @@ module.exports = {
             next();
         } catch (e) {
             next(e);
+        }
+    },
+
+    checkActionToken: (actionTokenType) => async (req, res, next) => {
+        try {
+            const token = req.get(headerNames.AUTHORIZATION);
+
+            if (!token) {
+                return next({
+                    message: errorMessages.INVALID_TOKEN,
+                    status: errorStatuses.code_401
+                });
+            }
+
+            jwtService.verifyToken(token, actionTokenType);
+
+            const foundActionToken = await ActionToken.findOne({token});
+
+            if (!foundActionToken) {
+                return next({
+                    message: errorMessages.INVALID_TOKEN,
+                    status: errorStatuses.code_401
+                });
+            }
+
+            await ActionToken.deleteOne({token});
+
+            req.foundUser = foundActionToken.user;
+
+            next();
+        } catch (err) {
+            next(err);
+        }
+    },
+
+    checkMessageToken: async (req, res, next) => {
+        try {
+            const token = req.get(headerNames.AUTHORIZATION);
+            const {body: {phone_number}} = req;
+
+            if (!token) {
+                return next({
+                    message: errorMessages.INVALID_MESSAGE_TOKEN,
+                    status: errorStatuses.code_401
+                });
+            }
+
+            req.foundUser = await messageTokenService.verifyMessageToken(
+                phone_number,
+                token,
+                messageTokenTypes.ACTIVATE_USER
+            );
+
+            next();
+        } catch (err) {
+            next(err);
         }
     }
 };

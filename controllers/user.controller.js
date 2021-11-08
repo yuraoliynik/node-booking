@@ -9,7 +9,6 @@ const {
 
 const {
     ActionToken,
-    MessageToken,
     OAuth,
     User
 } = require('../models');
@@ -62,16 +61,12 @@ module.exports = {
             const {_id, phone_number, email} = createdUser;
 
             if (!!phone_number) {
-                const messageToken = messageTokenService.generateMessageToken(
-                    messageTokenTypes.PHONE_NUMBER_VERIFY
+                const messageToken = await messageTokenService.createMessageToken(
+                    _id,
+                    messageTokenTypes.ACTIVATE_USER
                 );
 
-                await MessageToken.create({
-                    ...messageToken,
-                    user: _id
-                });
-
-                const messageText = `${messageToken} is your verification code.`;
+                const messageText = `${messageToken.token} is your verification code.`;
 
                 await messageService.sendMessage(
                     phone_number,
@@ -80,20 +75,20 @@ module.exports = {
             }
 
             if (!!email) {
-                const actionToken = jwtService.generateActionToken(actionTokenTypes.ACTIVATE_ACCOUNT);
+                const actionToken = jwtService.generateActionToken(actionTokenTypes.ACTIVATE_USER);
 
                 await ActionToken.create({
                     ...actionToken,
                     user: _id
                 });
 
-                const linkActivateAccount = `${HOST_URL}/auth/activate-account/${actionToken.token}`;
+                const linkActivateUser = `${HOST_URL}/auth/activate/${actionToken.token}`;
                 await emailService.sendMail(
                     email,
                     emailActions.USER_REGISTRATION,
                     {
                         userName: name,
-                        link: linkActivateAccount
+                        link: linkActivateUser
                     }
                 );
             }

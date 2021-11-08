@@ -11,7 +11,9 @@ const {
         UPDATE_AVATAR,
         DELETE_AVATAR,
 
-        ADD_PHONE_OR_EMAIL
+        ADD_PHONE_OR_EMAIL,
+
+        CHANGE_USER_DATA
     },
     userRoles: {
         ADMIN,
@@ -68,5 +70,10 @@ module.exports = {
         ADMIN,
         MANAGER,
         OWNER
+    ],
+
+    [CHANGE_USER_DATA]: [
+        ADMIN,
+        MANAGER
     ]
 };
