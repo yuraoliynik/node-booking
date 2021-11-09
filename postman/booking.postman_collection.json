@@ -1,0 +1,1177 @@
+{
+	"info": {
+		"_postman_id": "fea7b4c6-fa56-4f99-81df-cbf5d8652672",
+		"name": "booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create-user-registered-by-phone",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"My_name_phone\",\r\n    \"last_name\": \"My_last_name\",\r\n    \"phone_number\": \"+380976433544\",\r\n    \"password\": \"My_PassWord!20\",\r\n    \"role\": \"guest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-user-registered-by-email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"My_name_email\",\r\n    \"last_name\": \"My_last_name\",\r\n    \"email\": \"yuraoliynyk.20@gmail.com\",\r\n    \"password\": \"My_PassWord!20\",\r\n    \"role\": \"guest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-phone-or-email (add phone)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTY1OTMsImV4cCI6MTYzNjQ1NzQ5M30.-ZEZkCvgPa0HVZxdw-wT6RWTkwN7eWH4HDjfaQqy0iM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\": \"+380974455367\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users/618a51aa637f2b4fb8da5bf6/phone-or-email",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a51aa637f2b4fb8da5bf6",
+								"phone-or-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-phone-or-email (add email)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTYxNTUsImV4cCI6MTYzNjQ1NzA1NX0.lkFTUZ93PLh4jBSb_kt0zwSHJwXrIdGNeLksPbbC8l0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"someEMail@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users/618a4faa1a2407558b7861fc/phone-or-email",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a4faa1a2407558b7861fc",
+								"phone-or-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzYxOTYzOTMsImV4cCI6MTYzNjE5NzI5M30.K8pJO8JdMa4JSm5UWmgpP-lvd1-kr_cB3DzD3V4zE8g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"My_name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users/61864cacc5d4a6b6312431c7",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"61864cacc5d4a6b6312431c7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTU2MDIsImV4cCI6MTYzNjQ1NjUwMn0.FKYrZliH8N6e5oTTBAx6nKy9lfC0nWW7c7nXETuJeJY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/users",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "chenge-user-status (for maneger or admin))",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTY1OTMsImV4cCI6MTYzNjQ1NzQ5M30.-ZEZkCvgPa0HVZxdw-wT6RWTkwN7eWH4HDjfaQqy0iM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"blocked\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users/618a51aa637f2b4fb8da5bf6/status",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a51aa637f2b4fb8da5bf6",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-avatar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTYxNTUsImV4cCI6MTYzNjQ1NzA1NX0.lkFTUZ93PLh4jBSb_kt0zwSHJwXrIdGNeLksPbbC8l0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/Yura/Desktop/user-image-2.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_host}}/users/618a4faa1a2407558b7861fc/avatar",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a4faa1a2407558b7861fc",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-user-data-for-admin-or-manager",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTcxNTQsImV4cCI6MTYzNjQ1ODA1NH0.1pdw_SyqD2W-d8xq1NhJ3jGEnHbr_VP6eG7nVOfPylE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"nameee\",\r\n    \"last_name\": \"ooooooo\",\r\n    \"rating\": 4,\r\n    \"role\": \"manager\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users/618a51aa637f2b4fb8da5bf6/data",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a51aa637f2b4fb8da5bf6",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-by-id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTUwNDAsImV4cCI6MTYzNjQ1NTk0MH0.mm3A3YeXmWzueheGkaqcs3K2Sqr0E1XmXbC2AmYQWtc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/users/618a4faa1a2407558b7861fc",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a4faa1a2407558b7861fc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-deactivated",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTY1OTMsImV4cCI6MTYzNjQ1NzQ5M30.-ZEZkCvgPa0HVZxdw-wT6RWTkwN7eWH4HDjfaQqy0iM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"deactivated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/users/618a51aa637f2b4fb8da5bf6/status",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a51aa637f2b4fb8da5bf6",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NjgxMzAsImV4cCI6MTYzNjQ2OTAzMH0.1LNFazUypzyLbh3P8rOcdqKIvP9hjIZsgciGgxItta4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/users/618a86577aad4c1b05b362f1",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a86577aad4c1b05b362f1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-places (only for holder)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NzM5NzAsImV4cCI6MTYzNjQ3NDg3MH0.0XzUBmtBrPS5xhNoGw_7G1aCKTpgpBtKZa-ckeV1BHE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/users/618a54ae132585a2cb4bb3de/places",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a54ae132585a2cb4bb3de",
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-orders (only for holder or guest) Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0ODQ4NTIsImV4cCI6MTYzNjQ4NTc1Mn0.rgTYfK88llema5oYtT0pTgFM_VtFe_tkKrUumZ1pt-g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/users/618a54ae132585a2cb4bb3de/orders",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"users",
+								"618a54ae132585a2cb4bb3de",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login-by-phone",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\": \"+380976433544\",\r\n    \"password\": \"My_PassWord!20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/auth",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-by-email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"yuraoliynyk.20@gmail.com\",\r\n    \"password\": \"My_PassWord!20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/auth",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTU2MDIsImV4cCI6MTYzOTA0NzYwMn0.czyDehJxKxV9pHfb1qUZpDwHnvXvXz7sbUjDivlikdg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/auth/refresh",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-activate-by-phone",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "746920",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\": \"+380976433544\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/auth/activate",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-activate-by-email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTQ4MjYsImV4cCI6MTYzNjU0MTIyNn0.XNCijK3lfuVJeieSPlNC3Mauflszp6c-8u1DJZM2COo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"someEmail@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/auth/activate",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password (create action and send email)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"yuraoliynyk.20@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/auth/forgot-password/email",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password (recreate by email and save new password)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0Njc2NzksImV4cCI6MTYzNjU1NDA3OX0.7ma7rcvf4LtGkBozZykmhAvlYzBSseJJKW369Vb8RsI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"new_password\": \"SomeNEWpass!20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/auth/forgot-password/email",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password",
+								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "places",
+			"item": [
+				{
+					"name": "create-place",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0OTE0NjcsImV4cCI6MTYzNjQ5MjM2N30.YIRWLwqyknXYeOKnDuauhSNwYu_vArSK1nfkUrv7IOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"My_place_title\",\r\n    \"description\": \"My_place_description\",\r\n    \"country\": \"Ukraine\",\r\n    \"city\": \"Lviv\",\r\n    \"region\": \"Lviv\",\r\n    \"street\": \"Chornovola\",\r\n    \"house\": \"14\",\r\n    \"apartment\": \"52\",\r\n    \"price\": \"200\",\r\n    \"square\": 0,\r\n    \"guests\": 1,\r\n    \"bedrooms\": 1,\r\n    \"bathrooms\": 1,\r\n    \"beds\": 1,\r\n    \"holder\": \"618adb7b57eb3754c0473ca4\",\r\n    \"holder_confirmation\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/places",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-place-by-id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/places/618a919e2edd03e6e85c20b9",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places",
+								"618a919e2edd03e6e85c20b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-places (only with status enable)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/places",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-place",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NzI1NTgsImV4cCI6MTYzNjQ3MzQ1OH0.08h2DE6ibvP0y78SAv6WtXLePG_PPNPrGp0F3LTZDmo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"My_place_title\",\r\n    \"description\": \"My_place_description\",\r\n    \"country\": \"Ukraine\",\r\n    \"city\": \"Lviv\",\r\n    \"region\": \"Lviv\",\r\n    \"street\": \"Chornovola\",\r\n    \"house\": \"14\",\r\n    \"apartment\": \"52\",\r\n    \"price\": \"200\",\r\n    \"square\": 0,\r\n    \"guests\": 1,\r\n    \"bedrooms\": 1,\r\n    \"bathrooms\": 1,\r\n    \"beds\": 1,\r\n    \"holder_confirmation\": \"true\",\r\n    \"status\": \"enable\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/places/618a919e2edd03e6e85c20b9",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places",
+								"618a919e2edd03e6e85c20b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-place",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NzI1NTgsImV4cCI6MTYzNjQ3MzQ1OH0.08h2DE6ibvP0y78SAv6WtXLePG_PPNPrGp0F3LTZDmo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/places/618a919e2edd03e6e85c20b9",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places",
+								"618a919e2edd03e6e85c20b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-place-data-for-admin-or-manager",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NzI1NTgsImV4cCI6MTYzNjQ3MzQ1OH0.08h2DE6ibvP0y78SAv6WtXLePG_PPNPrGp0F3LTZDmo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"My_place_title\",\r\n    \"description\": \"My_place_description\",\r\n    \"country\": \"Ukraine\",\r\n    \"city\": \"Lviv\",\r\n    \"region\": \"Lviv\",\r\n    \"street\": \"Chornovola\",\r\n    \"house\": \"14\",\r\n    \"apartment\": \"52\",\r\n    \"price\": \"200\",\r\n    \"square\": 0,\r\n    \"guests\": 1,\r\n    \"bedrooms\": 1,\r\n    \"bathrooms\": 1,\r\n    \"beds\": 1,\r\n    \"holder_confirmation\": \"true\",\r\n    \"status\": \"enable\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/places/618a992806ce14b172513451/data",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places",
+								"618a992806ce14b172513451",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-place-photo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NzMzMzgsImV4cCI6MTYzNjQ3NDIzOH0.Ftdmlhhffn-DqeiQBFiUrtYyRNDiaWqbSSULx7f6DsI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/Yura/Desktop/user-image-2.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_host}}/places/618a992806ce14b172513451/photo",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places",
+								"618a992806ce14b172513451",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "create-order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0OTI1MDksImV4cCI6MTYzNjQ5MzQwOX0.clzVvpiEaQNFKXpOewuKYhcYcWj_pfLg7zsbo40C9Vo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start_date\": \"2021-11-09T14:31:51.069Z\",\r\n    \"count_days\": \"10\",\r\n    \"sum\": \"2000\",\r\n    \"count_persons\": \"2\",\r\n    \"place\": \"618ae0db3c529a09a718a57d\",\r\n    \"holder\": \"618adb7b57eb3754c0473ca4\",\r\n    \"guest\": \"618add0028a406cd43c09064\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/orders",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-order-by-id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0ODMxOTksImV4cCI6MTYzNjQ4NDA5OX0.w8x8DxIprNHGQggz2fCt2vdKrrfeBNyhIiefzoGloS8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/orders/618abecc3dfbf3bea2cedf73\n",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders",
+								"618abecc3dfbf3bea2cedf73\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0ODM0NDEsImV4cCI6MTYzNjQ4NDM0MX0.C0mTHVyjy61kGD8uP6ZvjQBh2f6ffwh6z0UJ-BPxcds",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/orders",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-order",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0ODM0NDEsImV4cCI6MTYzNjQ4NDM0MX0.C0mTHVyjy61kGD8uP6ZvjQBh2f6ffwh6z0UJ-BPxcds",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/orders/618abecc3dfbf3bea2cedf73",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders",
+								"618abecc3dfbf3bea2cedf73"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-order-data-for-admin-or-manager",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0ODM4MTYsImV4cCI6MTYzNjQ4NDcxNn0.gersPGk5ugQsH0wzNhohUy8jOJWVglNDIOyYixI_1WA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start_date\": \"2021-09-09T14:31:51.069Z\",\r\n    \"count_days\": \"10\",\r\n    \"sum\": \"2000\",\r\n    \"count_persons\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/orders/618ac26cf0e9ca6cee4e25e1/data",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders",
+								"618ac26cf0e9ca6cee4e25e1",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "holder-confirm-order (allow or denied)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0ODM4MTYsImV4cCI6MTYzNjQ4NDcxNn0.gersPGk5ugQsH0wzNhohUy8jOJWVglNDIOyYixI_1WA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"allow\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/orders/618ac40cf0166a30d1eed861/status",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders",
+								"618ac40cf0166a30d1eed861",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reviews",
+			"item": [
+				{
+					"name": "create-guest-review (only guest)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0OTI1MDksImV4cCI6MTYzNjQ5MzQwOX0.clzVvpiEaQNFKXpOewuKYhcYcWj_pfLg7zsbo40C9Vo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"Commmmmmment\",\r\n    \"rating\": 3,\r\n    \"guest\": \"618add0028a406cd43c09064\",\r\n    \"place\": \"618ae0db3c529a09a718a57d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/reviews",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-holder-review (only holder)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0OTM3MzEsImV4cCI6MTYzNjQ5NDYzMX0.I3W62d3g5Py5AtUd3EVleJ9Ou7F3BvV8U6QC1tPidIk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"holder review comment\",\r\n    \"rating\": 5,\r\n    \"holder\": \"618adb7b57eb3754c0473ca4\",\r\n    \"guest\": \"618add0028a406cd43c09064\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/reviews",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-review-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/reviews/618aea26112e035b27706941",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"reviews",
+								"618aea26112e035b27706941"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/reviews",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-review",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NzI1NTgsImV4cCI6MTYzNjQ3MzQ1OH0.08h2DE6ibvP0y78SAv6WtXLePG_PPNPrGp0F3LTZDmo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_host}}/places/618a919e2edd03e6e85c20b9",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"places",
+								"618a919e2edd03e6e85c20b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-review-data-for-admin-or-manager",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0OTQ0MDEsImV4cCI6MTYzNjQ5NTMwMX0.UfwOlfEjz484QIDxaX7Uij6lkNakFTIVFyw6ad3mScI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"New  Commmmmmment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/reviews/618aea26112e035b27706941/data",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"reviews",
+								"618aea26112e035b27706941",
+								"data"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

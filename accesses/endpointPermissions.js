@@ -45,8 +45,6 @@ const {
         CREATE_HOLDER_REVIEW,
         DELETE_REVIEW,
 
-        ADD_REVIEW_PHOTO,
-
         CHANGE_REVIEW_DATA
     },
     userRoles: {
@@ -172,7 +170,7 @@ module.exports = {
         MANAGER
     ],
 
-    [HOLDER_CONFIRM_ORDER]: [HOLDER],
+    [HOLDER_CONFIRM_ORDER]: [OWNER],
 
     [CHANGE_ORDER_DATA]: [
         ADMIN,
@@ -190,12 +188,6 @@ module.exports = {
     [DELETE_REVIEW]: [
         ADMIN,
         MANAGER
-    ],
-
-    [ADD_REVIEW_PHOTO]: [
-        ADMIN,
-        MANAGER,
-        OWNER
     ],
 
     [CHANGE_REVIEW_DATA]: [

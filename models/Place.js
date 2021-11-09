@@ -79,7 +79,12 @@ const placeSchema = new Schema({
         type: [String],
         default: ''
     },
-    rating: {
+    count_votes: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    count_star: {
         type: Number,
         required: true,
         min: 0,
@@ -108,6 +113,14 @@ const placeSchema = new Schema({
     versionKey: false,
     toObject: {virtuals: true},
     toJSON: {virtuals: true}
+});
+
+placeSchema.virtual('rating').get(function() {
+    if (this.count_star) {
+        return this.count_votes/this.count_star;
+    }
+
+    return 0;
 });
 
 module.exports = model(modelNames.PLACE, placeSchema);

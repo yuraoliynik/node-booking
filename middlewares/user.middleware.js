@@ -47,8 +47,7 @@ module.exports = {
             }
 
             const foundUser = await User
-                .findById(userId)
-                .lean();
+                .findById(userId);
 
             if (!foundUser) {
                 return next({

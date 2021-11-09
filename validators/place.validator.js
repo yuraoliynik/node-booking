@@ -67,7 +67,6 @@ const {
     bathrooms,
     beds,
     photos,
-    rating,
     status,
     holder,
     holder_confirmation,
@@ -111,6 +110,7 @@ module.exports = {
         district,
         street,
         house,
+        apartment,
         price,
         square,
         guests,
@@ -143,7 +143,6 @@ module.exports = {
         bathrooms,
         beds,
         photos,
-        rating,
         status: status
             .valid(...Object.values(placeStatuses)),
         holder,

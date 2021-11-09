@@ -33,10 +33,6 @@ const userJoiProp = {
             .regex(regexp.PASSWORD),
     avatar:
         Joi.string(),
-    rating:
-        Joi.number()
-            .min(0)
-            .max(5),
     status:
         Joi.string(),
     role:
@@ -50,7 +46,6 @@ const {
     email,
     password,
     avatar,
-    rating,
     status,
     role
 } = userJoiProp;
@@ -99,11 +94,6 @@ module.exports = {
     changeUserDataForManager: Joi.object({
         name,
         last_name,
-        phone_number,
-        email,
-        password,
-        avatar,
-        rating,
         role: role
             .valid(
                 userRoles.ADMIN,

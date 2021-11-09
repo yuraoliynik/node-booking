@@ -12,7 +12,7 @@ module.exports = {
 
             if (!photo) {
                 return next({
-                    message: errorMessages.NO_AVATAR,
+                    message: errorMessages.NO_PHOTO,
                     status: errorStatuses.code_400
                 });
             }

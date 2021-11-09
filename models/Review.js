@@ -10,10 +10,6 @@ const reviewSchema = new Schema({
         length: 300,
         default: ''
     },
-    photo: {
-        type: [String],
-        default: ''
-    },
     rating: {
         type: Number,
         required: true,

@@ -11,8 +11,7 @@ module.exports = {
             const foundPlaces = await Place
                 .find({
                     status: placeStatuses.ENABLE
-                })
-                .lean();
+                });
 
             res
                 .json(foundPlaces);
@@ -72,7 +71,7 @@ module.exports = {
             await Place.deleteOne({_id: placeId});
 
             res
-                .status(errorStatuses.code_204);
+                .sendStatus(errorStatuses.code_204);
         } catch (e) {
             next(e);
         }

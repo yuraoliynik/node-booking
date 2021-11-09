@@ -146,7 +146,10 @@ module.exports = {
 
             jwtService.verifyToken(token, actionTokenType);
 
-            const foundActionToken = await ActionToken.findOne({token});
+            const foundActionToken = await ActionToken
+                .findOne({token})
+                .populate({path: 'user', lean: true})
+                .lean();
 
             if (!foundActionToken) {
                 return next({

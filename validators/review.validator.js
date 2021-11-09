@@ -1,12 +1,9 @@
 const Joi = require('joi');
 
-const guestReviewProp = {
+const reviewProp = {
     comment:
         Joi.string()
             .max(300),
-    photo:
-        Joi.array()
-            .items(Joi.string()),
     rating:
         Joi.number()
             .min(0)
@@ -22,18 +19,16 @@ const guestReviewProp = {
 
 const {
     comment,
-    photo,
     rating,
     guest,
     place,
     holder
-} = guestReviewProp;
+} = reviewProp;
 
 module.exports = {
     createGuestReview: Joi.object({
         comment: comment
             .required(),
-        photo,
         rating: rating
             .required(),
         guest: guest
@@ -45,18 +40,17 @@ module.exports = {
     createHolderReview: Joi.object({
         comment: comment
             .required(),
-        photo,
         rating: rating
             .required(),
         guest: guest
             .required(),
-        holder: place
+        holder: holder
             .required()
     }),
 
     changeDataReviewForManager: Joi.object({
         comment,
-        photo,
+        rating,
         guest,
         place,
         holder

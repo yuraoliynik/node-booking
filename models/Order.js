@@ -46,7 +46,6 @@ const orderSchema = new Schema({
         default: orderStatuses.AWAITING_CONFIRMATION
     },
 }, {
-    id: false,
     timestamps: true,
     versionKey: false,
     toObject: {virtuals: true},

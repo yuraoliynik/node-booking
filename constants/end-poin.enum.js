@@ -44,7 +44,5 @@ module.exports = {
     CREATE_HOLDER_REVIEW: 'create-holder-review',
     DELETE_REVIEW: 'delete-review',
 
-    ADD_REVIEW_PHOTO: 'add-review-photo',
-
     CHANGE_REVIEW_DATA: 'change-review-data',
 };

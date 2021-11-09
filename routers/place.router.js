@@ -43,6 +43,7 @@ placeRouter.put(
     authMiddleware.checkAccessToken,
     placeMiddleware.checkPlaceIdAndFoundPlace,
     accessMiddleware.checkPlaceEndpointPermissions(endPoints.UPDATE_PLACE),
+    placeMiddleware.checkPlaceStatus,
     placeController.updatePlace
 );
 placeRouter.delete(
@@ -67,6 +68,7 @@ placeRouter.post(
     authMiddleware.checkAccessToken,
     placeMiddleware.checkPlaceIdAndFoundPlace,
     accessMiddleware.checkPlaceEndpointPermissions(endPoints.CHANGE_PLACE_DATA),
+    placeMiddleware.checkPlaceStatus,
     placeController.updatePlace
 );
 

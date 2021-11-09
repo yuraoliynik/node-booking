@@ -33,7 +33,8 @@ module.exports = {
 
             const {_id, role} = authorizedUser;
 
-            const isThisOwner = endpointPermission.includes(userRoles.OWNER) && userId === _id.toString();
+            const isThisOwner = endpointPermission.includes(userRoles.OWNER) &&
+                userId.toString() === _id.toString();
 
             if (isThisOwner) {
                 req.foundUser = authorizedUser;
@@ -59,7 +60,7 @@ module.exports = {
         try {
             const {
                 authorizedUser,
-                foundPlace: {holder}
+                foundPlace
             } = req;
 
             if (!endPointName) {
@@ -77,7 +78,14 @@ module.exports = {
 
             const {_id, role} = authorizedUser;
 
-            const isThisOwner = endpointPermission.includes(userRoles.OWNER) && holder === _id;
+            let holder;
+
+            if (foundPlace) {
+                holder = foundPlace.holder;
+            }
+
+            const isThisOwner = endpointPermission.includes(userRoles.OWNER) &&
+                holder.toString() === _id.toString();
 
             if (isThisOwner) {
                 return next();
@@ -100,7 +108,7 @@ module.exports = {
         try {
             const {
                 authorizedUser,
-                foundOrder: {holder, guest}
+                foundOrder
             } = req;
 
             if (!endPointName) {
@@ -118,13 +126,23 @@ module.exports = {
 
             const {_id, role} = authorizedUser;
 
-            const isHolderOwner = endpointPermission.includes(userRoles.OWNER) && holder === _id;
+            let holder;
+            let guest;
+
+            if (foundOrder) {
+                holder = foundOrder.holder;
+                guest = foundOrder.guest;
+            }
+
+            const isHolderOwner = endpointPermission.includes(userRoles.OWNER) &&
+                holder.toString() === _id.toString();
 
             if (isHolderOwner) {
                 return next();
             }
 
-            const isGuestOwner = endpointPermission.includes(userRoles.OWNER) && guest === _id;
+            const isGuestOwner = endpointPermission.includes(userRoles.OWNER) &&
+                guest.toString() === _id.toString();
 
             if (isGuestOwner) {
                 return next();
@@ -147,7 +165,7 @@ module.exports = {
         try {
             const {
                 authorizedUser,
-                foundReview: {holder, guest}
+                foundReview
             } = req;
 
             if (!endPointName) {
@@ -165,7 +183,16 @@ module.exports = {
 
             const {_id, role} = authorizedUser;
 
-            const isHolderOwner = endpointPermission.includes(userRoles.OWNER) && holder === _id;
+            let holder;
+            let guest;
+
+            if (foundReview) {
+                holder = foundReview.holder;
+                guest = foundReview.guest;
+            }
+
+            const isHolderOwner = endpointPermission.includes(userRoles.OWNER) &&
+                holder.toString() === _id.toString();
 
             if (isHolderOwner) {
                 return next();

@@ -21,12 +21,12 @@ module.exports = {
         let actionSecretWord;
 
         switch (actionTokenType) {
-            case actionTokenTypes.ACTIVATE_ACCOUNT:
+            case actionTokenTypes.ACTIVATE_USER:
                 actionSecretWord = JWT_SECRET_WORD_ACTION_ACTIVATE_ACCOUNT;
                 break;
 
             case actionTokenTypes.FORGOT_PASSWORD:
-                actionSecretWord = JWT_SECRET_WORD_ACTION_ACTIVATE_ACCOUNT;
+                actionSecretWord = JWT_SECRET_WORD_ACTION_FORGOT_PASSWORD;
                 break;
 
             default:
@@ -67,7 +67,7 @@ module.exports = {
                     secretWord = JWT_SECRET_WORD_REFRESH;
                     break;
 
-                case actionTokenTypes.ACTIVATE_ACCOUNT:
+                case actionTokenTypes.ACTIVATE_USER:
                     secretWord = JWT_SECRET_WORD_ACTION_ACTIVATE_ACCOUNT;
                     break;
 

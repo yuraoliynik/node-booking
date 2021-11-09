@@ -28,7 +28,7 @@ const {userUtil} = require('../utils');
 module.exports = {
     getUsers: async (req, res, next) => {
         try {
-            const foundUsers = await User.find().lean();
+            const foundUsers = await User.find();
 
             res
                 .json(foundUsers);
@@ -62,7 +62,7 @@ module.exports = {
                 password: hashPassword
             });
 
-            const {_id, phone_number, email} = createdUser;
+            const {_id, name, phone_number, email} = createdUser;
 
             if (!!phone_number) {
                 const messageToken = await messageTokenService.createMessageToken(
@@ -134,7 +134,7 @@ module.exports = {
             await OAuth.deleteMany({user: userId});
 
             res
-                .status(errorStatuses.code_204);
+                .sendStatus(errorStatuses.code_204);
         } catch (e) {
             next(e);
         }
@@ -171,8 +171,7 @@ module.exports = {
             const foundPlaces = await Place
                 .find({
                     user: _id
-                })
-                .lean();
+                });
 
             res
                 .json(foundPlaces);

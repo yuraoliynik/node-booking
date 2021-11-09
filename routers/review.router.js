@@ -6,7 +6,6 @@ const {reviewController} = require('../controllers');
 const {
     accessMiddleware,
     authMiddleware,
-    fileMiddleware,
     reviewMiddleware,
     validatorMiddleware
 } = require('../middlewares');
@@ -23,17 +22,17 @@ reviewRouter.post(
     validatorMiddleware.isBodyValidate(reviewValidator.createGuestReview),
     authMiddleware.checkAccessToken,
     accessMiddleware.checkReviewEndpointPermissions(endPoints.CREATE_GUEST_REVIEW),
-    reviewController.createReview
+    reviewController.createGuestReview
 );
 reviewRouter.put(
     '/',
     validatorMiddleware.isBodyValidate(reviewValidator.createHolderReview),
     authMiddleware.checkAccessToken,
     accessMiddleware.checkReviewEndpointPermissions(endPoints.CREATE_HOLDER_REVIEW),
-    reviewController.createReview
+    reviewController.createHolderReview
 );
 
-reviewRouter.post(
+reviewRouter.get(
     '/:reviewId',
     reviewMiddleware.checkReviewIdAndFoundPlace,
     accessMiddleware.checkPlaceEndpointPermissions(endPoints.GET_REVIEW_BY_ID),
@@ -45,15 +44,6 @@ reviewRouter.delete(
     reviewMiddleware.checkReviewIdAndFoundPlace,
     accessMiddleware.checkPlaceEndpointPermissions(endPoints.DELETE_REVIEW),
     reviewController.deleteReview
-);
-reviewRouter.post(
-    '/:reviewId/photo',
-    fileMiddleware.checkPhoto,
-    authMiddleware.checkAccessToken,
-    reviewMiddleware.checkReviewIdAndFoundPlace,
-    accessMiddleware.checkPlaceEndpointPermissions(endPoints.ADD_REVIEW_PHOTO),
-    reviewMiddleware.uploadReviewPhoto,
-    reviewController.addReviewPhoto
 );
 reviewRouter.post(
     '/:reviewId/data',

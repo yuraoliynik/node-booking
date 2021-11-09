@@ -13,6 +13,7 @@ const {
 } = require('../constants');
 
 const {ErrorHandler} = require('../classes');
+const allTemplates = require('../email-templates');
 
 const emailTemplates = new EmailTemplates({
     views: {
@@ -21,9 +22,7 @@ const emailTemplates = new EmailTemplates({
 });
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: false,
+    service: 'gmail',
     auth: {
         user: NO_REPLAY_EMAIL,
         pass: NO_REPLAY_EMAIL_PASS
@@ -31,7 +30,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendMail = async (userEmail, emailAction, context = {}) => {
-    const emailInfo = emailTemplates[emailAction];
+    const emailInfo = allTemplates[emailAction];
 
     if (!emailInfo) {
         throw new ErrorHandler(

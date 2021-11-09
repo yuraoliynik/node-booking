@@ -19,7 +19,7 @@ module.exports = {
             const {params: {orderId}} = req;
 
             const foundOrder = await Order
-                .findById(orderId)
+                .findOne({id: orderId})
                 .lean();
 
             if (!foundOrder) {
@@ -90,9 +90,13 @@ module.exports = {
                 holder
             } = foundPlace;
 
-            const apartmentNumber = apartment > -1 ? apartment : '';
+            if (!holder.email){
+                return next();
+            }
 
-            const placeAddress = `${city}, ${street}, ${house}, ${apartment}, ${apartmentNumber}`;
+            const apartmentString = apartment > -1 ? `apartment: ${apartment}` : '';
+
+            const placeAddress = `${city}, street: ${street}, house: ${house}, ${apartmentString}`;
             const guestName = foundGuest.name;
             const countDays = count_days;
             const countPersons = count_persons;

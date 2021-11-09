@@ -1,7 +1,8 @@
 const {
     errorMessages,
     errorStatuses,
-    itemTypes
+    itemTypes,
+    placeStatuses
 } = require('../constants');
 
 const {Place} = require('../models');
@@ -13,8 +14,7 @@ module.exports = {
             const {params: {placeId}} = req;
 
             const foundPlace = await Place
-                .findById(placeId)
-                .lean();
+                .findById(placeId);
 
             if (!foundPlace) {
                 return next({
@@ -31,11 +31,28 @@ module.exports = {
         }
     },
 
+    checkPlaceStatus: (req, res, next) => {
+        try {
+            const {foundPlace: {status}} = req;
+
+            if (status === placeStatuses.RESERVED) {
+                return next({
+                    message: errorMessages.CAN_NOT_CHANGE_PLACE_RESERVED,
+                    status: errorStatuses.code_403
+                });
+            }
+
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
+
     uploadPlacePhoto: async (req, res, next) => {
         try {
             const {
                 files: {photo},
-                foundUser: {_id}
+                authorizedUser: {_id}
             } = req;
 
             const uploadInfo = await s3Service.uploadImage(

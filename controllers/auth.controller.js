@@ -143,13 +143,13 @@ module.exports = {
     changePasswordByEmail: async (req, res, next) => {
         try {
             const {
-                body: {newPassword},
+                body: {new_password},
                 foundUser: {_id, name, email}
             } = req;
 
             await OAuth.deleteMany({user: _id});
 
-            const hashPassword = await passwordService.hash(newPassword);
+            const hashPassword = await passwordService.hash(new_password);
 
             await User.updateOne(
                 {_id},

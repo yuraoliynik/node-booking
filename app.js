@@ -31,8 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/auth', authRouter);
-app.use('/review', reviewRouter);
-app.use('/order', orderRouter);
+app.use('/reviews', reviewRouter);
+app.use('/orders', orderRouter);
 app.use('/places', placeRouter);
 app.use('/users', userRouter);
 

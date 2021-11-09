@@ -1,5 +1,12 @@
-const {errorStatuses} = require('../constants');
-const {Order} = require('../models');
+const {
+    errorStatuses,
+    placeStatuses
+} = require('../constants');
+
+const {
+    Order,
+    Place
+} = require('../models');
 
 module.exports = {
     getOrders: async (req, res, next) => {
@@ -28,9 +35,14 @@ module.exports = {
 
     createOrder: async (req, res, next) => {
         try {
-            const {body} = req;
+            const {body, body: {place}} = req;
 
             const createdOrder = await Order.create(body);
+
+            await Place.updateOne(
+                {_id: place},
+                {status: placeStatuses.RESERVED}
+            );
 
             res
                 .status(errorStatuses.code_201)
@@ -66,7 +78,7 @@ module.exports = {
             await Order.deleteOne({_id: orderId});
 
             res
-                .status(errorStatuses.code_204);
+                .sendStatus(errorStatuses.code_204);
         } catch (e) {
             next(e);
         }

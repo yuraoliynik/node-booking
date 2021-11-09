@@ -43,7 +43,12 @@ const userSchema = new Schema({
         type: String,
         default: ''
     },
-    rating: {
+    count_votes: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    count_star: {
         type: Number,
         required: true,
         min: 0,
@@ -72,5 +77,13 @@ const userSchema = new Schema({
     {phone_number: 1, email: 1},
     {unique: true}
 );
+
+userSchema.virtual('rating').get(function() {
+    if (this.count_star) {
+        return this.count_votes/this.count_star;
+    }
+
+    return 0;
+});
 
 module.exports = model(modelNames.USER, userSchema);

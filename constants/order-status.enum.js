@@ -1,5 +1,5 @@
 module.exports = {
-    AWAITING_CONFIRMATION: 'awaiting confirmation',
+    AWAITING_CONFIRMATION: 'awaiting_confirmation',
     ALLOW: 'allow',
     DENIED: 'denied',
     OVER: 'over'

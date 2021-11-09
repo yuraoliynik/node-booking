@@ -1,5 +1,10 @@
 const {errorStatuses} = require('../constants');
-const {Review} = require('../models');
+
+const {
+    Place,
+    Review,
+    User
+} = require('../models');
 
 module.exports = {
     getReviews: async (req, res, next) => {
@@ -26,11 +31,53 @@ module.exports = {
         }
     },
 
-    createReview: async (req, res, next) => {
+    createGuestReview: async (req, res, next) => {
         try {
-            const {body} = req;
+            const {
+                body,
+                body: {rating, place}
+            } = req;
 
             const createdReview = await Review.create(body);
+
+            await Place
+                .updateOne(
+                    {_id: place},
+                    {
+                        $inc: {
+                            count_votes: 1,
+                            count_star: rating
+                        }
+                    }
+                );
+
+            res
+                .status(errorStatuses.code_201)
+                .json(createdReview);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    createHolderReview: async (req, res, next) => {
+        try {
+            const {
+                body,
+                body: {rating, guest}
+            } = req;
+
+            const createdReview = await Review.create(body);
+
+            await User
+                .updateOne(
+                    {_id: guest},
+                    {
+                        $inc: {
+                            count_votes: 1,
+                            count_star: rating
+                        }
+                    }
+                );
 
             res
                 .status(errorStatuses.code_201)
@@ -66,7 +113,7 @@ module.exports = {
             await Review.deleteOne({_id: reviewId});
 
             res
-                .status(errorStatuses.code_204);
+                .sendStatus(errorStatuses.code_204);
         } catch (e) {
             next(e);
         }

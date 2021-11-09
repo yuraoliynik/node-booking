@@ -1,6 +1,7 @@
 module.exports = {
     ACCESS_DENIED: 'Access denied',
     CAN_NOT_CHANGE_PHONE_OR_EMAIL: 'Can not change phone or email',
+    CAN_NOT_CHANGE_PLACE_RESERVED: 'Can not change - place reserved',
     CORS_IS_NOT_ALLOWED: 'CORS is not allowed',
     FILE_IS_TOO_BIG: 'File is too big',
     INVALID_MESSAGE_TOKEN: 'Invalid message token',
