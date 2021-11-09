@@ -53,31 +53,12 @@ userRouter.delete(
 
 userRouter.post(
     '/:userId/avatar',
-    fileMiddleware.checkUserAvatar,
+    fileMiddleware.checkPhoto,
     authMiddleware.checkAccessToken,
     accessMiddleware.checkEndpointPermissions(endPoints.ADD_AVATAR),
     userMiddleware.checkUserIdAndFoundUser,
     accessMiddleware.checkRoleRights,
     userMiddleware.uploadUserAvatar,
-    userController.updateUser
-);
-userRouter.post(
-    '/:userId/avatar',
-    fileMiddleware.checkUserAvatar,
-    authMiddleware.checkAccessToken,
-    accessMiddleware.checkEndpointPermissions(endPoints.UPDATE_AVATAR),
-    userMiddleware.checkUserIdAndFoundUser,
-    accessMiddleware.checkRoleRights,
-    userMiddleware.uploadUserAvatar,
-    userController.updateUser
-);
-userRouter.delete(
-    '/:userId/avatar',
-    validatorMiddleware.isBodyValidate(userValidator.updateAvatar),
-    authMiddleware.checkAccessToken,
-    accessMiddleware.checkEndpointPermissions(endPoints.DELETE_AVATAR),
-    userMiddleware.checkUserIdAndFoundUser,
-    accessMiddleware.checkRoleRights,
     userController.updateUser
 );
 userRouter.post(
@@ -91,7 +72,28 @@ userRouter.post(
     userMiddleware.isPhoneOrEmailExist,
     userController.updateUser
 );
-userRouter.delete(
+userRouter.post(
+    '/:userId/status',
+    validatorMiddleware.isBodyValidate(userValidator.userStatusDeactivated),
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.USER_STATUS_DEACTIVATED),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
+    userController.changeUserStatus
+);
+userRouter.get(
+    '/:userId/places',
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.USER_GET_PLACES),
+    userController.userGetPlaces
+);
+userRouter.get(
+    '/:userId/orders',
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.USER_GET_ORDERS),
+    userController.userGetOrders
+);
+userRouter.post(
     '/:userId/data',
     validatorMiddleware.isBodyValidate(userValidator.changeUserDataForManager),
     authMiddleware.checkAccessToken,
@@ -99,6 +101,15 @@ userRouter.delete(
     userMiddleware.checkUserIdAndFoundUser,
     accessMiddleware.checkRoleRights,
     userController.updateUser
+);
+userRouter.put(
+    '/:userId/status',
+    validatorMiddleware.isBodyValidate(userValidator.changeStatusForManager),
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkEndpointPermissions(endPoints.CHANGE_USER_STATUS),
+    userMiddleware.checkUserIdAndFoundUser,
+    accessMiddleware.checkRoleRights,
+    userController.changeUserStatus
 );
 
 module.exports = userRouter;

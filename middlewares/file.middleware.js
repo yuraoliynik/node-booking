@@ -6,18 +6,18 @@ const {
 } = require('../constants');
 
 module.exports = {
-    checkUserAvatar: (req, res, next) => {
+    checkPhoto: (req, res, next) => {
         try {
-            const {avatar} = req.files;
+            const {photo} = req.files;
 
-            if (!avatar) {
+            if (!photo) {
                 return next({
                     message: errorMessages.NO_AVATAR,
                     status: errorStatuses.code_400
                 });
             }
 
-            const {size, mimetype} = avatar;
+            const {size, mimetype} = photo;
 
             if (!fileMimeTypes.PHOTOS.includes(mimetype)) {
                 return next({

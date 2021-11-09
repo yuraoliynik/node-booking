@@ -1,6 +1,7 @@
 module.exports = {
-    FREE: 'free',
     CHECKING: 'checking',
+    DISABLED: 'disabled',
+    ENABLE: 'enable',
     RESERVED: 'reserved',
     USED: 'used'
 };

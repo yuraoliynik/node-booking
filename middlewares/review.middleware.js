@@ -4,26 +4,26 @@ const {
     itemTypes
 } = require('../constants');
 
-const {Place} = require('../models');
+const {Review} = require('../models');
 const {s3Service} = require('../services');
 
 module.exports = {
-    checkPlaceIdAndFoundPlace: async (req, res, next) => {
+    checkReviewIdAndFoundPlace: async (req, res, next) => {
         try {
-            const {params: {placeId}} = req;
+            const {params: {reviewId}} = req;
 
-            const foundPlace = await Place
-                .findById(placeId)
+            const foundReview = await Review
+                .findById(reviewId)
                 .lean();
 
-            if (!foundPlace) {
+            if (!foundReview) {
                 return next({
-                    message: errorMessages.PLACE_ID_DOESNT_EXIST,
+                    message: errorMessages.REVIEW_ID_DOESNT_EXIST,
                     status: errorStatuses.code_404
                 });
             }
 
-            req.foundPlace = foundPlace;
+            req.foundReview = foundReview;
 
             next();
         } catch (e) {
@@ -31,7 +31,7 @@ module.exports = {
         }
     },
 
-    uploadPlacePhoto: async (req, res, next) => {
+    uploadReviewPhoto: async (req, res, next) => {
         try {
             const {
                 files: {photo},
@@ -40,11 +40,11 @@ module.exports = {
 
             const uploadInfo = await s3Service.uploadImage(
                 photo,
-                itemTypes.PLACES,
+                itemTypes.REVIEWS,
                 _id.toString()
             );
 
-            req.body = {newPlacePhoto: uploadInfo.Location};
+            req.body = {newReviewPhoto: uploadInfo.Location};
 
             next();
         } catch (err) {

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const {
     JWT_SECRET_WORD_ACCESS,
     JWT_SECRET_WORD_REFRESH,
-
     JWT_SECRET_WORD_ACTION_ACTIVATE_ACCOUNT,
     JWT_SECRET_WORD_ACTION_FORGOT_PASSWORD
 } = require('../configs/config');

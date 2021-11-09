@@ -10,16 +10,26 @@ const orderSchema = new Schema({
         type: Date,
         required: true
     },
-    end_date: {
-        type: Date,
+    count_days: {
+        type: Number,
+        required: true,
+        default: 1
+    },
+    sum: {
+        type: Number,
         required: true
+    },
+    count_persons: {
+        type: Number,
+        required: true,
+        default: 1
     },
     place: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: modelNames.PLACE
     },
-    owner: {
+    holder: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: modelNames.USER
@@ -33,7 +43,7 @@ const orderSchema = new Schema({
         type: String,
         required: true,
         enum: Object.values(orderStatuses),
-        default: orderStatuses.CHECKING
+        default: orderStatuses.AWAITING_CONFIRMATION
     },
 }, {
     id: false,

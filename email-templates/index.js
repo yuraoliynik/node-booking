@@ -1,6 +1,11 @@
 const {emailActions} = require('../constants');
 
 module.exports = {
+    [emailActions.ORDER_AWAITS_CONFIRMATION]: {
+        templateName: 'order-awaits-confirmation',
+        subject: 'Order on Booking await your confirm!!!'
+    },
+
     [emailActions.PASSWORD_WAS_CHANGE]: {
         templateName: 'password-was-change',
         subject: 'Your password on Booking was change!!!'

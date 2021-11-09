@@ -4,25 +4,72 @@ const {
     orderStatuses
 } = require('../constants');
 
-const orderValidator = Joi.object({
-    start_date: Joi.date()
-        .required(),
+const orderJoiProp = {
+    start_date:
+        Joi.date(),
+    count_days:
+        Joi.number(),
+    sum:
+        Joi.number(),
+    count_persons:
+        Joi.number(),
+    place:
+        Joi.string(),
+    holder:
+        Joi.string(),
+    guest:
+        Joi.string(),
+    status:
+        Joi.string()
+};
 
-    end_date: Joi.date()
-        .required(),
+const {
+    start_date,
+    count_days,
+    sum,
+    count_persons,
+    place,
+    holder,
+    guest,
+    status,
+} = orderJoiProp;
 
-    place: Joi.string()
-        .required(),
+module.exports = {
+    createOrder: Joi.object({
+        start_date: start_date
+            .required(),
+        count_days: count_days
+            .required(),
+        sum: sum
+            .required(),
+        count_persons: count_persons
+            .required(),
+        place: place
+            .required(),
+        holder: holder
+            .required(),
+        guest: guest
+            .required()
+    }),
 
-    owner: Joi.string()
-        .required(),
+    holderConfirmOrder: Joi.object({
+        status: status
+            .required()
+            .valid(
+                orderStatuses.ALLOW,
+                orderStatuses.DENIED
+            )
+    }),
 
-    guest: Joi.string()
-        .required(),
-
-    status: Joi.string()
-        .valid(...Object.values(orderStatuses))
-        .default(orderStatuses.CHECKING)
-});
-
-module.exports = orderValidator;
+    changeOrderDataForManager: Joi.object({
+        start_date,
+        count_days,
+        sum,
+        count_persons,
+        place,
+        holder,
+        guest,
+        status: status
+            .valid(...Object.values(orderStatuses))
+    }),
+};

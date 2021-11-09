@@ -1,4 +1,6 @@
 module.exports = {
-    CHECKING: 'checking',
-    USED: 'used'
+    AWAITING_CONFIRMATION: 'awaiting confirmation',
+    ALLOW: 'allow',
+    DENIED: 'denied',
+    OVER: 'over'
 };

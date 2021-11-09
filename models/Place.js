@@ -75,7 +75,7 @@ const placeSchema = new Schema({
         required: true,
         default: 1
     },
-    photo: {
+    photos: {
         type: [String],
         default: ''
     },
@@ -92,12 +92,12 @@ const placeSchema = new Schema({
         enum: Object.values(placeStatuses),
         default: placeStatuses.CHECKING
     },
-    owner: {
+    holder: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: modelNames.USER
     },
-    owner_confirmation: {
+    holder_confirmation: {
         type: Boolean,
         required: true,
         default: false

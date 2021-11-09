@@ -4,7 +4,7 @@ const {
     modelNames
 } = require('../constants');
 
-const guestReviewSchema = new Schema({
+const reviewSchema = new Schema({
     comment: {
         type: String,
         length: 300,
@@ -21,16 +21,18 @@ const guestReviewSchema = new Schema({
         max: 5,
         default: 0
     },
-    place: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: modelNames.PLACE
-    },
     guest: {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: modelNames.USER
     },
+    place: {
+        type: Schema.Types.ObjectId,
+        ref: modelNames.PLACE
+    },
+    holder: {
+        type: Schema.Types.ObjectId,
+        ref: modelNames.USER
+    }
 }, {
     id: false,
     timestamps: true,
@@ -39,4 +41,4 @@ const guestReviewSchema = new Schema({
     toJSON: {virtuals: true}
 });
 
-module.exports = model(modelNames.GUEST_REVIEW, guestReviewSchema);
+module.exports = model(modelNames.REVIEW, reviewSchema);

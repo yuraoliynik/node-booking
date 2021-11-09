@@ -15,7 +15,8 @@ const {
 
 const {
     emailService,
-    jwtService
+    jwtService,
+    passwordService
 } = require('../services');
 
 module.exports = {
@@ -57,7 +58,7 @@ module.exports = {
             const {foundUser: {_id, name, email}} = req;
 
             await User.updateOne(
-                {id: _id},
+                {_id},
                 {status: userStatuses.ACTIVE}
             );
 
@@ -79,7 +80,7 @@ module.exports = {
             const {foundUser: {_id}} = req;
 
             await User.updateOne(
-                {id: _id},
+                {_id},
                 {status: userStatuses.ACTIVE}
             );
 
@@ -148,9 +149,11 @@ module.exports = {
 
             await OAuth.deleteMany({user: _id});
 
+            const hashPassword = await passwordService.hash(newPassword);
+
             await User.updateOne(
                 {_id},
-                {password: newPassword}
+                {password: hashPassword}
             );
 
             await emailService.sendMail(

@@ -1,5 +1,5 @@
 module.exports = {
-    COMMENTS:'comments',
     PLACES: 'places',
+    REVIEWS: 'reviews',
     USERS: 'users'
 };

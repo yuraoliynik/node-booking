@@ -10,9 +10,12 @@ const {
 } = require('./configs/config');
 
 const {errorStatuses} = require('./constants');
+const {defaultDataUtil} = require('./utils');
 
 const {
     authRouter,
+    reviewRouter,
+    orderRouter,
     placeRouter,
     userRouter
 } = require('./routers');
@@ -28,6 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/auth', authRouter);
+app.use('/review', reviewRouter);
+app.use('/order', orderRouter);
 app.use('/places', placeRouter);
 app.use('/users', userRouter);
 
@@ -42,5 +47,7 @@ app.use('*', (err, req, res, next) => {
 
 app.listen(APP_PORT, () => {
     console.log(`App listens port: ${APP_PORT}`);
+
+    defaultDataUtil();
 });
 

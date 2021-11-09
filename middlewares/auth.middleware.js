@@ -14,7 +14,8 @@ const {
 
 const {
     jwtService,
-    messageTokenService
+    messageTokenService,
+    passwordService
 } = require('../services');
 
 module.exports = {
@@ -43,6 +44,22 @@ module.exports = {
             next();
         } catch (e) {
             next(e);
+        }
+    },
+
+    checkPassword: async (req, res, next) => {
+        try {
+            const {body, foundUser} = req;
+
+            const {password: hashPassword} = await User
+                .findById(foundUser._id)
+                .select('+password');
+
+            await passwordService.compare(body.password, hashPassword);
+
+            next();
+        } catch (err) {
+            next(err);
         }
     },
 

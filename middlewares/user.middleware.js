@@ -99,12 +99,12 @@ module.exports = {
     uploadUserAvatar: async (req, res, next) => {
         try {
             const {
-                files: {avatar},
+                files: {photo},
                 foundUser: {_id}
             } = req;
 
             const uploadInfo = await s3Service.uploadImage(
-                avatar,
+                photo,
                 itemTypes.USERS,
                 _id.toString()
             );

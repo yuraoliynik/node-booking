@@ -4,6 +4,7 @@ const {actionTokenTypes} = require('../constants');
 const {authController} = require('../controllers');
 
 const {
+    accessMiddleware,
     authMiddleware,
     validatorMiddleware
 } = require('../middlewares');
@@ -14,6 +15,8 @@ authRouter.post(
     '/',
     validatorMiddleware.isBodyValidate(authValidator.checkDataForLogin, 1),
     authMiddleware.checkPhoneOrEmail,
+    authMiddleware.checkPassword,
+    accessMiddleware.checkUserStatus,
     authController.login
 );
 

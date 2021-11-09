@@ -10,6 +10,8 @@ const {
 const {
     ActionToken,
     OAuth,
+    Order,
+    Place,
     User
 } = require('../models');
 
@@ -20,6 +22,8 @@ const {
     messageTokenService,
     passwordService
 } = require('../services');
+
+const {userUtil} = require('../utils');
 
 module.exports = {
     getUsers: async (req, res, next) => {
@@ -93,9 +97,11 @@ module.exports = {
                 );
             }
 
+            const normalizeUser = userUtil.normalize(createdUser);
+
             res
                 .status(errorStatuses.code_201)
-                .json(createdUser);
+                .json(normalizeUser);
         } catch (e) {
             next(e);
         }
@@ -125,10 +131,71 @@ module.exports = {
             const {params: {userId}} = req;
 
             await User.deleteOne({_id: userId});
-            OAuth.deleteMany({user: userId});
+            await OAuth.deleteMany({user: userId});
 
             res
                 .status(errorStatuses.code_204);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    changeUserStatus: async (req, res, next) => {
+        try {
+            const {
+                params: {userId},
+                body: {status}
+            } = req;
+
+            await OAuth.deleteMany({user: userId});
+
+            const updatedUser = await User
+                .findByIdAndUpdate(
+                    userId,
+                    {status},
+                    {new: true, runValidators: true}
+                ).lean();
+
+            res
+                .status(errorStatuses.code_201)
+                .json(updatedUser);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    userGetPlaces: async (req, res, next) => {
+        try {
+            const {foundUser: {_id}} = req;
+
+            const foundPlaces = await Place
+                .find({
+                    user: _id
+                })
+                .lean();
+
+            res
+                .json(foundPlaces);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    userGetOrders: async (req, res, next) => {
+        try {
+            const {foundUser: {_id}} = req;
+
+            const foundOrders = await Order
+                .find({
+                    $or:[
+                        {holder: _id},
+                        {guest: _id}
+                    ]
+                })
+                .lean();
+
+            res
+                .json(foundOrders);
         } catch (e) {
             next(e);
         }

@@ -38,8 +38,7 @@ const userJoiProp = {
             .min(0)
             .max(5),
     status:
-        Joi.string()
-            .valid(...Object.values(userStatuses)),
+        Joi.string(),
     role:
         Joi.string()
 };
@@ -79,14 +78,22 @@ module.exports = {
             )
     }).xor('phone_number', 'email'),
 
-    updateAvatar: Joi.object({
-        avatar: avatar
-            .required()
-    }),
-
     updateData: Joi.object({
         name,
-        last_name
+        last_name,
+        avatar
+    }),
+
+    userStatusDeactivated: Joi.object({
+        status: status
+            .required()
+            .valid(userStatuses.DEACTIVATED)
+    }),
+
+    changeStatusForManager: Joi.object({
+        status: status
+            .required()
+            .valid(...Object.values(userStatuses))
     }),
 
     changeUserDataForManager: Joi.object({
@@ -97,8 +104,13 @@ module.exports = {
         password,
         avatar,
         rating,
-        status,
-        role
+        role: role
+            .valid(
+                userRoles.ADMIN,
+                userRoles.MANAGER,
+                userRoles.HOLDER,
+                userRoles.GUEST
+            )
     }),
 
     userJoiProp

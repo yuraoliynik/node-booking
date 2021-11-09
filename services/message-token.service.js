@@ -4,6 +4,7 @@ const {
     errorMessages,
     errorStatuses
 } = require('../constants');
+
 const {ErrorHandler} = require('../classes');
 const {MessageToken} = require('../models');
 
@@ -17,9 +18,13 @@ const generateSimpleToken = () => {
         (sum, currentItem) => Number(sum) + Number(currentItem)
     );
 
-    const tokenControlSum = [...tokenSum.toString()].reduce(
+    let tokenControlSum = [...tokenSum.toString()].reduce(
         (sum, currentItem) => Number(sum) + Number(currentItem)
     );
+
+    if (tokenControlSum % 10 === 0) {
+        tokenControlSum = 0;
+    }
 
     const simpleToken =`${token}${tokenControlSum}`;
 
@@ -37,9 +42,13 @@ const verifySimpleToken = (messageToken) => {
         (sum, currentItem) => Number(sum) + Number(currentItem)
     );
 
-    const verifyTokenControlSum = [...verifyTokenSum.toString()].reduce(
+    let verifyTokenControlSum = [...verifyTokenSum.toString()].reduce(
         (sum, currentItem) => Number(sum) + Number(currentItem)
     );
+
+    if (verifyTokenControlSum % 10 === 0) {
+        verifyTokenControlSum = 0;
+    }
 
     if (verifyTokenControlSum !== tokenControlSum) {
         throw new ErrorHandler(
